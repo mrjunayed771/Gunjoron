@@ -200,11 +200,20 @@
     padding:20px 14px;text-align:center;
     box-shadow:0 3px 12px rgba(27,48,112,0.08);transition:0.3s;}
   .team-card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(27,48,112,0.16);}
-  .team-photo{width:80px;height:80px;border-radius:50%;margin:0 auto 13px;
+  /* ── TEAM PHOTO WRAP (নতুন) ── */
+  .team-photo-wrap{position:relative;display:inline-block;margin:0 auto 13px;}
+  .team-photo{width:80px;height:80px;border-radius:50%;margin:0;
     overflow:hidden;border:3px solid var(--teal);background:#e5e7eb;
     display:flex;align-items:center;justify-content:center;}
   .team-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .team-photo .fallback{font-size:2rem;}
+  /* ── FB ICON BADGE ── */
+  .fb-icon-btn{position:absolute;bottom:1px;left:1px;width:22px;height:22px;
+    background:#1877F2;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.35);
+    transition:transform 0.2s;text-decoration:none;z-index:2;}
+  .fb-icon-btn:hover{transform:scale(1.18);}
+  .fb-icon-btn svg{width:12px;height:12px;display:block;}
   .team-card h4{font-size:0.84rem;font-weight:700;color:var(--navy);line-height:1.4;}
   .team-card p{font-size:0.7rem;color:var(--teal);font-weight:600;margin-top:4px;line-height:1.4;}
 
@@ -290,13 +299,23 @@
     section{padding:58px 5%;}
     .section-title{font-size:1.45rem;}
     .tab-content.active{grid-template-columns:1fr;}
-    .hero-stats{gap:10px;}
-    .stat{padding:10px 13px;min-width:80px;}
+    /* ── স্ট্যাট এক লাইনে ── */
+    .hero-stats{gap:6px;flex-wrap:nowrap;}
+    .stat{padding:8px 6px;min-width:0;flex:1;}
+    .stat-num{font-size:1.1rem;}
+    .stat-label{font-size:0.6rem;}
     .team-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
   }
 </style>
 </head>
 <body>
+
+<!-- ── REUSABLE SVG DEFS ── -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="fb-svg" viewBox="0 0 24 24">
+    <path fill="white" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </symbol>
+</svg>
 
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -399,21 +418,21 @@
     <button class="tab-btn" onclick="switchTab(3)">🎙️ ওয়াজ</button>
   </div>
   <div class="tab-content active" id="tab-0">
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/Pb8jy0LUSdo?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe><div class="yt-card-info">      <h4>গুঞ্জরণ নাশিদ</h4><p>গুঞ্জরণ স্টুডিও</p></div></div>
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/m85KmyQIBkY?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe><div class="yt-card-info"><h4>গুঞ্জরণ নাশিদ</h4><p>গুঞ্জরণ স্টুডিও</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/Pb8jy0LUSdo?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>গুঞ্জরণ নাশিদ</h4><p>গুঞ্জরণ স্টুডিও</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/m85KmyQIBkY?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>গুঞ্জরণ নাশিদ</h4><p>গুঞ্জরণ স্টুডিও</p></div></div>
     <div class="more-card" style="background:linear-gradient(135deg,var(--navy),var(--teal));" onclick="window.open('https://www.youtube.com/@GunjoronStudio','_blank')"><div class="more-card-inner"><div class="icon">▶</div><h4>আরও নাশিদ দেখুন</h4><p>YouTube চ্যানেলে যান →</p></div></div>
   </div>
   <div class="tab-content" id="tab-1">
     <div class="more-card" style="background:linear-gradient(135deg,var(--red),#f06060);min-height:280px;" onclick="window.open('https://www.youtube.com/@GunjoronStudio','_blank')"><div class="more-card-inner"><div class="icon">🎬</div><h4>গুঞ্জরণ ফিল্ম ও নাটক</h4><p style="margin-bottom:14px;">ইসলামি নাটক ও শর্টফিল্ম দেখতে আমাদের YouTube চ্যানেল ভিজিট করুন।</p><div style="background:rgba(255,255,255,0.2);padding:7px 18px;border-radius:20px;display:inline-block;font-size:0.8rem;font-weight:700;">YouTube চ্যানেলে যান →</div></div></div>
   </div>
   <div class="tab-content" id="tab-2">
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/DXMqysCxJX8?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe>    <div class="yt-card-info"><h4>কুরআন তিলাওয়াত</h4><p>গুঞ্জরণ তিলাওয়াত</p></div></div>
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/JjeyS553jFs?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe><div class="yt-card-info"><h4>কুরআন তিলাওয়াত</h4><p>গুঞ্জরণ তিলাওয়াত</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/DXMqysCxJX8?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>কুরআন তিলাওয়াত</h4><p>গুঞ্জরণ তিলাওয়াত</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/JjeyS553jFs?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>কুরআন তিলাওয়াত</h4><p>গুঞ্জরণ তিলাওয়াত</p></div></div>
     <div class="more-card" style="background:linear-gradient(135deg,#1a5c2e,#2e9b4e);" onclick="window.open('https://www.youtube.com/@gunjoron-tilawat','_blank')"><div class="more-card-inner"><div class="icon">📖</div><h4>আরও তিলাওয়াত শুনুন</h4><p>YouTube চ্যানেলে যান →</p></div></div>
   </div>
   <div class="tab-content" id="tab-3">
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/wb9DNp8y6Tw?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe>    <div class="yt-card-info"><h4>ইসলামি ওয়াজ</h4><p>গুঞ্জরণ ওয়াজ</p></div></div>
-    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/i3AL4IpmGoY?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" loading="lazy"></iframe><div class="yt-card-info"><h4>ইসলামি ওয়াজ</h4><p>গুঞ্জরণ ওয়াজ</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/wb9DNp8y6Tw?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>ইসলামি ওয়াজ</h4><p>গুঞ্জরণ ওয়াজ</p></div></div>
+    <div class="yt-card"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/i3AL4IpmGoY?rel=0&modestbranding=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe><div class="yt-card-info"><h4>ইসলামি ওয়াজ</h4><p>গুঞ্জরণ ওয়াজ</p></div></div>
     <div class="more-card" style="background:linear-gradient(135deg,#6b2fa0,#9b4dca);" onclick="window.open('https://www.youtube.com/@gunjoronwaz','_blank')"><div class="more-card-inner"><div class="icon">🎙️</div><h4>আরও ওয়াজ শুনুন</h4><p>YouTube চ্যানেলে যান →</p></div></div>
   </div>
 </section>
@@ -452,50 +471,204 @@
     <div class="section-line"></div>
   </div>
 
+  <!-- নাশিদ শিল্পী -->
   <div class="team-category">
-    <div class="team-cat-title"><h3>🎵 নাশিদ শিল্পী</h3><div class="team-cat-line"></div></div>
+    <div class="team-cat-title">
+      <h3>🎵 নাশিদ শিল্পী <span class="team-cat-sub">(যাদের নাশিদ আমরা আপলোড দিয়েছি)</span></h3>
+      <div class="team-cat-line"></div>
+    </div>
     <div class="team-grid">
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Shoieb Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>শোয়াইব ইসলাম</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>মুহাম্মাদ তাহসিন</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Omor Faruk.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>ওমর ফারুক</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>আব্দুল্লাহ আওলাদ</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Malek.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>আব্দুল মালেক</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Al amin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>আল আমিন</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Ridoy.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>কাউসার মাহমুদ হৃদয়</h4><p>নাশিদ শিল্পী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdur Rahman.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><h4>আব্দুর রহমান</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Shoieb Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/shoieb.islam.221424" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>শোয়াইব ইসলাম</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুহাম্মাদ তাহসিন</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Omor Faruk.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/profile.php?id=100075224510619" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>ওমর ফারুক</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আব্দুল্লাহ আওলাদ</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Malek.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/abdul.malak.48838" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আব্দুল মালেক</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Al amin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/profile.php?id=61582764721807" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আল আমিন</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Ridoy.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/ridoy.kawsarmahmud" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>কাউসার মাহমুদ হৃদয়</h4><p>নাশিদ শিল্পী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdur Rahman.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
+          <a href="https://www.facebook.com/abdur.rahman.huzaifi.148343" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আব্দুর রহমান</h4><p>নাশিদ শিল্পী</p>
+      </div>
     </div>
   </div>
 
+  <!-- প্রোডাকশন টিম -->
   <div class="team-category">
-    <div class="team-cat-title"><h3>🎬 প্রোডাকশন টিম</h3><div class="team-cat-line"></div></div>
+    <div class="team-cat-title">
+      <h3>🎬 প্রোডাকশন টিম</h3>
+      <div class="team-cat-line"></div>
+    </div>
     <div class="team-grid">
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎬</span>'"></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>ডিরেক্টর, ভিডিও এডিটর ও সিনেমাটোগ্রাফার</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Muminul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>✍️</span>'"></div><h4>মুমিনুল ইসলাম</h4><p>গল্পকার, পোস্টার ডিজাইনার</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Mujahidul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎞️</span>'"></div><h4>মুজাহিদুল ইসলাম</h4><p>সহকারী ভিডিও এডিটর</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Aziz.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div><h4>আব্দুল আজিজ</h4><p>সহকারী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abu Hurayra.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div><h4>আবু হুরায়রা খাঁন</h4><p>সহকারী</p></div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎬</span>'"></div>
+          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>ডিরেক্টর, ভিডিও এডিটর ও সিনেমাটোগ্রাফার</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Muminul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>✍️</span>'"></div>
+          <a href="https://www.facebook.com/mominulislam38" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুমিনুল ইসলাম</h4><p>গল্পকার, পোস্টার ডিজাইনার</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Mujahidul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎞️</span>'"></div>
+          <a href="https://www.facebook.com/md.mujahidul.islam.907353" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুজাহিদুল ইসলাম</h4><p>সহকারী ভিডিও এডিটর</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Aziz.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div>
+          <a href="https://www.facebook.com/abdulaziz720" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আব্দুল আজিজ</h4><p>সহকারী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abu Hurayra.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div>
+          <a href="https://www.facebook.com/hm.abuhorira.khan.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আবু হুরায়রা খাঁন</h4><p>সহকারী</p>
+      </div>
     </div>
   </div>
 
+  <!-- কারী সাহেবান -->
   <div class="team-category">
-    <div class="team-cat-title"><h3>📖 কারী সাহেবান</h3><div class="team-cat-line"></div></div>
+    <div class="team-cat-title">
+      <h3>📖 কারী সাহেবান <span class="team-cat-sub">(যাদের তিলাওয়াত আমরা আপলোড দিয়েছি)</span></h3>
+      <div class="team-cat-line"></div>
+    </div>
     <div class="team-grid">
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>কারী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><h4>আব্দুল্লাহ আওলাদ</h4><p>কারী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><h4>মুহাম্মাদ তাহসিন</h4><p>কারী</p></div>
-      <div class="team-card"><div class="team-photo"><img loading="lazy" decoding="async" src="Maruf Ahmed Proshno.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><h4>মারুফ আহমেদ প্রশ্ন</h4><p>কারী</p></div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
+          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>কারী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
+          <a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>আব্দুল্লাহ আওলাদ</h4><p>কারী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
+          <a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুহাম্মাদ তাহসিন</h4><p>কারী</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo"><img loading="lazy" decoding="async" src="Maruf Ahmed Proshno.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
+          <a href="https://www.facebook.com/marufahammad.binsalam" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মারুফ আহমেদ প্রশ্ন</h4><p>কারী</p>
+      </div>
     </div>
   </div>
 
+  <!-- আলেম প্যানেল -->
   <div class="team-category">
-    <div class="team-cat-title"><h3>🎙️ আলেম প্যানেল <span class="team-cat-sub">(যাদের ওয়াজ আমরা আপলোড দিয়েছি)</span></h3><div class="team-cat-line"></div></div>
+    <div class="team-cat-title">
+      <h3>🎙️ আলেম প্যানেল <span class="team-cat-sub">(যাদের ওয়াজ আমরা আপলোড দিয়েছি)</span></h3>
+      <div class="team-cat-line"></div>
+    </div>
     <div class="team-grid">
-      <div class="team-card"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Mamunul Hok.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><h4>মাওলানা মামুনুল হক</h4><p style="color:#6b2fa0;">আলেম</p></div>
-      <div class="team-card"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Sakawat Hosain Raji.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><h4>মুফতি সাকাওয়াত হুসাইন রাজি</h4><p style="color:#6b2fa0;">আলেম</p></div>
-      <div class="team-card"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Habibullah mahmud Kasemi.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><h4>মুফতি হাবিবুল্লাহ মাহমুদ কাসেমী</h4><p style="color:#6b2fa0;">আলেম</p></div>
-      <div class="team-card"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Oli Ullah.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><h4>মুফতি ওয়ালি উল্লাহ</h4><p style="color:#6b2fa0;">আলেম</p></div>
-      <div class="team-card"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Ibrahim Sulatn.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><h4>মাওলানা ইবরাহিম সুলতান</h4><p style="color:#6b2fa0;">আলেম</p></div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Mamunul Hok.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
+          <a href="https://www.facebook.com/maolanamamunulhaque" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মাওলানা মামুনুল হক</h4><p style="color:#6b2fa0;">আলেম</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Sakawat Hosain Raji.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
+          <a href="https://www.facebook.com/shakhaowat.hossain.52" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মুফতি সাকাওয়াত হুসাইন রাজি</h4><p style="color:#6b2fa0;">আলেম</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Habibullah mahmud Kasemi.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
+          <!-- কোনো নির্দিষ্ট প্রোফাইল লিংক নেই, আইকন নেই -->
+        </div>
+        <h4>মুফতি হাবিবুল্লাহ মাহমুদ কাসেমী</h4><p style="color:#6b2fa0;">আলেম</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Oli Ullah.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
+          <!-- কোনো নির্দিষ্ট প্রোফাইল লিংক নেই, আইকন নেই -->
+        </div>
+        <h4>মুফতি ওয়ালি উল্লাহ</h4><p style="color:#6b2fa0;">আলেম</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Ibrahim Sulatn.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
+          <a href="https://www.facebook.com/search/top?q=ibrahim%20sultan" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
+        </div>
+        <h4>মাওলানা ইবরাহিম সুলতান</h4><p style="color:#6b2fa0;">আলেম</p>
+      </div>
     </div>
   </div>
 </section>
@@ -515,28 +688,38 @@
       <div class="contact-item"><div class="contact-icon ci-red">📞</div><div class="contact-item-text"><h5>ফোন নম্বর</h5><p>+880 1704 598 772</p></div></div>
       <div class="contact-item"><div class="contact-icon ci-teal">✉️</div><div class="contact-item-text"><h5>ইমেইল</h5><p>gunjoronbd@gmail.com</p></div></div>
       <div class="social-links">
-        <a href="https://www.facebook.com/gonjoron" target="_blank" class="social-btn s-fb">📘 Facebook</a>
+        <!-- Real Facebook SVG logo -->
+        <a href="https://www.facebook.com/gonjoron" target="_blank" class="social-btn s-fb">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" style="flex-shrink:0;display:block"><path fill="white" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
         <a href="https://www.youtube.com/@GunjoronStudio" target="_blank" class="social-btn s-yt">▶ স্টুডিও</a>
         <a href="https://www.youtube.com/@gunjoron-tilawat" target="_blank" class="social-btn s-gr">📖 তিলাওয়াত</a>
         <a href="https://www.youtube.com/@gunjoronwaz" target="_blank" class="social-btn s-pu">🎙️ ওয়াজ</a>
       </div>
     </div>
+    <!-- FormSubmit দিয়ে ইমেইলে পাঠানো হবে -->
     <div class="contact-form">
-      <div class="form-group"><label>আপনার নাম</label><input type="text" placeholder="পূর্ণ নাম লিখুন"></div>
-      <div class="form-group"><label>ফোন নম্বর</label><input type="tel" placeholder="+880 ×××-×××-××××"></div>
-      <div class="form-group"><label>বিষয়</label>
-        <select>
-          <option>বিষয় নির্বাচন করুন</option>
-          <option>স্পন্সরশিপ ও সহযোগিতা</option>
-          <option>নাশিদ স্টুডিও বুকিং</option>
-          <option>ভিডিও প্রোডাকশন</option>
-          <option>কুরআন তিলাওয়াত</option>
-          <option>ওয়াজ / নাসিহা</option>
-          <option>সাধারণ জিজ্ঞাসা</option>
-        </select>
-      </div>
-      <div class="form-group"><label>বার্তা</label><textarea placeholder="আপনার বার্তা লিখুন..."></textarea></div>
-      <button class="form-submit" onclick="submitForm()">বার্তা পাঠান ✉️</button>
+      <form action="https://formsubmit.co/mrjunayed771@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="গুঞ্জরণ ওয়েবসাইট — নতুন বার্তা">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <div class="form-group"><label>আপনার নাম</label><input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required></div>
+        <div class="form-group"><label>ফোন নম্বর</label><input type="tel" name="phone" placeholder="+880 ×××-×××-××××"></div>
+        <div class="form-group"><label>বিষয়</label>
+          <select name="subject">
+            <option>বিষয় নির্বাচন করুন</option>
+            <option>স্পন্সরশিপ ও সহযোগিতা</option>
+            <option>নাশিদ স্টুডিও বুকিং</option>
+            <option>ভিডিও প্রোডাকশন</option>
+            <option>কুরআন তিলাওয়াত</option>
+            <option>ওয়াজ / নাসিহা</option>
+            <option>সাধারণ জিজ্ঞাসা</option>
+          </select>
+        </div>
+        <div class="form-group"><label>বার্তা</label><textarea name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea></div>
+        <button type="submit" class="form-submit">বার্তা পাঠান ✉️</button>
+      </form>
     </div>
   </div>
 </section>
@@ -584,44 +767,25 @@
 <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
-  // ── TAB SWITCH — পেজ রিলোড হবে না, scroll নেই ──
   function switchTab(i){
     document.querySelectorAll('.tab-content').forEach((t,j)=>t.classList.toggle('active',j===i));
     document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
   }
-
-  // ── SCROLL TOP BUTTON ──
   window.addEventListener('scroll',()=>{
     document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400);
   },{passive:true});
-
-  // ── HAMBURGER MENU ──
   function toggleNav(){
     document.getElementById('navbar').classList.toggle('open');
   }
-  // নেভ লিংকে ক্লিক করলে মেনু বন্ধ হবে
   document.querySelectorAll('.nav-links a').forEach(a=>{
     a.addEventListener('click',()=>document.getElementById('navbar').classList.remove('open'));
   });
-
-  // ── FORM SUBMIT ──
-  function submitForm(){
-    alert('আপনার বার্তা পাঠানো হয়েছে! জাযাকাল্লাহু খাইরান। আমরা শীঘ্রই যোগাযোগ করব।');
-  }
-
-  // ── SCROLL ANIMATION (IntersectionObserver) ──
   window.addEventListener('load',()=>{const obs=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity='1';
-      e.target.style.transform='translateY(0)';
-    }
+    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
   }),{threshold:0.06});
-
   document.querySelectorAll('.sector-card,.yt-card,.more-card,.team-card').forEach(el=>{
-    el.style.opacity='0';
-    el.style.transform='translateY(24px)';
-    el.style.transition='opacity 0.5s,transform 0.5s';
-    obs.observe(el);
+    el.style.opacity='0';el.style.transform='translateY(24px)';
+    el.style.transition='opacity 0.5s,transform 0.5s';obs.observe(el);
   });});
 </script>
 </body>
