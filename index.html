@@ -36,7 +36,7 @@
     box-shadow:0 2px 10px rgba(212,43,43,0.4);}
   .nav-cta:hover{background:linear-gradient(135deg,#b81f1f,#8a1010);transform:translateY(-2px);}
 
-  /* ── HAMBURGER (আধুনিক) ── */
+  /* ── HAMBURGER ── */
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
     background:linear-gradient(135deg,rgba(255,255,255,0.1),rgba(40,120,168,0.15));
     border:1px solid rgba(255,255,255,0.22);
@@ -53,13 +53,46 @@
   nav.open .hamburger span:nth-child(2){opacity:0;transform:scaleX(0);}
   nav.open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-  /* ── MOBILE MENU (horizontal) ── */
+  /* ── MOBILE MENU (open state — desktop fallback) ── */
   nav.open .nav-links{display:flex;flex-direction:row;flex-wrap:wrap;
     justify-content:center;position:absolute;top:100%;left:0;right:0;
     background:linear-gradient(180deg,#0a123c,#0d1f4a);
     padding:14px 4% 10px;gap:8px;
     border-top:1px solid rgba(255,255,255,0.08);}
   nav.open .nav-cta{display:flex;width:fit-content;margin:0 auto 12px;}
+
+  /* ── MOBILE-ONLY NAV OPEN OVERRIDES ── */
+  @media(max-width:768px){
+    /* hide যোগাযোগ button when menu is open */
+    nav.open .nav-cta{display:none !important;}
+
+    /* column layout + glassmorphism — no line overlap */
+    nav.open .nav-links{
+      flex-direction:column !important;
+      align-items:stretch !important;
+      background:rgba(5,12,40,0.96) !important;
+      backdrop-filter:blur(28px) !important;
+      -webkit-backdrop-filter:blur(28px) !important;
+      padding:10px 14px 16px !important;
+      gap:5px !important;
+      border-top:2px solid rgba(40,120,168,0.35) !important;
+      box-shadow:0 16px 48px rgba(0,0,0,0.55) !important;
+    }
+    nav.open .nav-links li{width:100%;}
+    nav.open .nav-links a{
+      display:block;
+      text-align:center;
+      padding:10px 16px !important;
+      background:rgba(255,255,255,0.06) !important;
+      border:1px solid rgba(255,255,255,0.1) !important;
+      border-radius:9px !important;
+      font-size:0.88rem !important;
+    }
+    nav.open .nav-links a:hover{
+      background:var(--red) !important;
+      border-color:var(--red) !important;
+    }
+  }
 
   /* ── TICKER ── */
   .ticker-outer{margin-top:64px;position:relative;overflow:hidden;}
@@ -272,6 +305,7 @@
     cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:0.3s;}
   .form-submit:hover{background:linear-gradient(135deg,var(--navy2),#081530);
     transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,48,112,0.3);}
+  .form-submit:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
 
   /* ── FOOTER ── */
   footer{background:linear-gradient(160deg,#06102b 0%,#0a1840 60%,#06102b 100%);
@@ -299,11 +333,91 @@
   .scroll-top.visible{opacity:1;pointer-events:all;}
   .scroll-top:hover{background:linear-gradient(135deg,var(--teal),var(--navy));}
 
+  /* ── THANK YOU OVERLAY (merged from thankyou.html) ── */
+  .ty-overlay{
+    position:fixed;inset:0;z-index:9999;
+    background:linear-gradient(160deg,#06102b 0%,#0d1f4a 45%,#1B3070 100%);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.4s ease;
+    overflow-y:auto;
+  }
+  .ty-overlay.show{opacity:1;pointer-events:all;}
+  .ty-overlay::before{content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse at 50% 40%,rgba(40,120,168,0.2) 0%,transparent 65%);
+    pointer-events:none;}
+  .ty-overlay::after{content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse at 20% 80%,rgba(212,43,43,0.07) 0%,transparent 55%);
+    pointer-events:none;}
+  .ty-card{
+    position:relative;z-index:1;
+    background:linear-gradient(160deg,rgba(255,255,255,0.07),rgba(40,120,168,0.06));
+    border:1px solid rgba(255,255,255,0.13);
+    border-radius:24px;padding:52px 44px;text-align:center;
+    max-width:520px;width:100%;
+    backdrop-filter:blur(16px);
+    box-shadow:0 24px 60px rgba(0,0,0,0.4);
+    transform:scale(0.88) translateY(30px);
+    transition:transform 0.55s cubic-bezier(0.175,0.885,0.32,1.275);
+    margin:auto;
+  }
+  .ty-overlay.show .ty-card{transform:none;}
+  .ty-check{
+    width:80px;height:80px;border-radius:50%;
+    background:linear-gradient(135deg,var(--teal),var(--navy));
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 24px;
+    box-shadow:0 8px 28px rgba(40,120,168,0.45);
+  }
+  .ty-check svg{width:40px;height:40px;}
+  .ty-logo{height:52px;object-fit:contain;margin:0 auto 28px;display:block;
+    filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5));}
+  .ty-h1{font-family:'Noto Serif Bengali',serif;
+    font-size:1.55rem;font-weight:700;color:#fff;
+    margin-bottom:20px;line-height:1.5;}
+  .ty-divider{width:60px;height:3px;
+    background:linear-gradient(90deg,var(--red),var(--teal));
+    border-radius:2px;margin:0 auto 24px;}
+  .ty-msg{font-size:0.97rem;line-height:2;
+    color:rgba(255,255,255,0.82);
+    border-left:4px solid var(--teal);
+    padding:18px 20px;
+    background:rgba(40,120,168,0.1);
+    border-radius:0 12px 12px 0;
+    text-align:left;margin-bottom:32px;}
+  .ty-msg strong{color:#fff;}
+  .ty-badge{display:inline-block;
+    background:linear-gradient(135deg,rgba(240,192,64,0.15),rgba(240,192,64,0.05));
+    border:1px solid rgba(240,192,64,0.3);
+    color:var(--gold);padding:8px 20px;border-radius:20px;
+    font-size:0.82rem;font-weight:700;letter-spacing:0.5px;margin-bottom:32px;
+    display:block;}
+  .ty-back{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:linear-gradient(135deg,var(--red),#a01818);
+    color:#fff;padding:13px 28px;border-radius:10px;
+    font-weight:700;font-size:0.92rem;
+    box-shadow:0 4px 18px rgba(212,43,43,0.4);
+    transition:all 0.3s;cursor:pointer;
+    border:none;font-family:'Hind Siliguri',sans-serif;width:100%;}
+  .ty-back:hover{background:linear-gradient(135deg,#b81f1f,#8a1010);
+    transform:translateY(-3px);box-shadow:0 8px 24px rgba(212,43,43,0.5);}
+  .ty-countdown{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:16px;}
+  .ty-countdown span{color:rgba(255,255,255,0.6);font-weight:600;}
+  .ty-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:24px;}
+  .ty-p{position:absolute;border-radius:50%;opacity:0.18;animation:tyFloat linear infinite;}
+  .ty-p1{width:6px;height:6px;background:var(--gold);top:15%;left:10%;animation-duration:8s;}
+  .ty-p2{width:4px;height:4px;background:var(--teal);top:70%;left:80%;animation-duration:11s;animation-delay:2s;}
+  .ty-p3{width:8px;height:8px;background:var(--red);top:40%;left:90%;animation-duration:9s;animation-delay:1s;}
+  .ty-p4{width:5px;height:5px;background:#fff;top:85%;left:15%;animation-duration:13s;animation-delay:3s;}
+  .ty-p5{width:3px;height:3px;background:var(--gold);top:25%;left:60%;animation-duration:7s;animation-delay:0.5s;}
+
   /* ── ANIMATIONS ── */
   @keyframes floatUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
   @keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   @keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+  @keyframes tyFloat{0%{transform:translateY(0)}50%{transform:translateY(-22px)}100%{transform:translateY(0)}}
 
   /* ── MOBILE ── */
   @media(max-width:768px){
@@ -320,6 +434,8 @@
     .stat-num{font-size:1.1rem;}
     .stat-label{font-size:0.6rem;}
     .team-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
+    .ty-card{padding:36px 24px;}
+    .ty-h1{font-size:1.25rem;}
   }
 </style>
 </head>
@@ -331,6 +447,32 @@
     <path fill="white" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
   </symbol>
 </svg>
+
+<!-- THANK YOU OVERLAY (merged from thankyou.html) -->
+<div class="ty-overlay" id="tyOverlay">
+  <div class="ty-card">
+    <div class="ty-particles">
+      <div class="ty-p ty-p1"></div><div class="ty-p ty-p2"></div>
+      <div class="ty-p ty-p3"></div><div class="ty-p ty-p4"></div><div class="ty-p ty-p5"></div>
+    </div>
+    <img src="logoA.gif" class="ty-logo" alt="গুঞ্জরণ"
+      onerror="this.onerror=null;this.src='https://scontent.fdac189-1.fna.fbcdn.net/v/t39.30808-6/699186887_122302543424018124_7467840352417706762_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Vn_BfbQ5kVAQ7kNvwGN3iGX&_nc_ht=scontent.fdac189-1.fna&oh=00_Af6ijIgAPpD42HCZuf_Sf16zvWfzlIzcqTyLwuQXk_stNQ&oe=6A0DFAE5'">
+    <div class="ty-check">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1 class="ty-h1">আপনার বার্তা পাঠানো হয়েছে!</h1>
+    <div class="ty-divider"></div>
+    <div class="ty-msg">
+      আমাদেরকে বার্তা পাঠানোর জন্য <strong>ধন্যবাদ।</strong><br><br>
+      আশা করি আমরা খুব শীঘ্রই আপনার সাথে যোগাযোগ করবো — <strong>ইনশা আল্লাহ।</strong>
+    </div>
+    <div class="ty-badge">🌟 গুঞ্জরণ টিম-এর পক্ষ থেকে আপনাকে জানাই অনেক অনেক মুবারকবাদ</div>
+    <button class="ty-back" onclick="hideThankyou()">← মূল পেজে ফিরে যান</button>
+    <p class="ty-countdown">স্বয়ংক্রিয়ভাবে ফিরে যাবে <span id="tyTimer">30</span> সেকেন্ডে...</p>
+  </div>
+</div>
 
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -351,7 +493,7 @@
 <!-- TICKER -->
 <div class="ticker-outer">
   <div class="ticker-bg">
-    <div class="ticker-badge"><span class="dot"></span>📢 বিজ্ঞপ্তি</div>
+    <div class="ticker-badge"><span class="dot"></span>বিজ্ঞপ্তি</div>
     <div class="ticker-scroll">
       <div class="ticker-track">
         <span class="ticker-item">আসসালামু আলাইকুম। আমরা একটি কল্যাণমূলক ইসলামিক প্রজেক্ট বাস্তবায়ন করছি; আপনার সম্মানিত প্রতিষ্ঠানের স্পন্সরশিপ ও সহযোগিতা কামনা করছি, যাতে দ্বীনের এই খেদমতে আপনারাও সওয়াবের অংশীদার হতে পারেন।</span>
@@ -367,7 +509,7 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-content">
-    <img loading="lazy" decoding="async" src="logoA.gif" class="hero-logo-img" alt="GUNJORON" onerror="this.onerror=null;this.src='https://scontent.fdac189-1.fna.fbcdn.net/v/t39.30808-6/699186887_122302543424018124_7467840352417706762_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Vn_BfbQ5kVAQ7kNvwGN3iGX&_nc_ht=scontent.fdac189-1.fna&oh=00_Af6ijIgAPpD42HCZuf_Sf16zvWfzlIzcqTyLwuQXk_stNQ&oe=6A0DFAE5'">
+    <img loading="lazy" decoding="async" src="logo.png" class="hero-logo-img" alt="GUNJORON" onerror="this.onerror=null;this.src='https://scontent.fdac189-1.fna.fbcdn.net/v/t39.30808-6/699186887_122302543424018124_7467840352417706762_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Vn_BfbQ5kVAQ7kNvwGN3iGX&_nc_ht=scontent.fdac189-1.fna&oh=00_Af6ijIgAPpD42HCZuf_Sf16zvWfzlIzcqTyLwuQXk_stNQ&oe=6A0DFAE5'">
     <div class="hero-btns" style="margin-top:20px;">
       <a href="#content" class="btn-primary">🎵 কন্টেন্ট দেখুন</a>
       <a href="#about" class="btn-outline">📖 আমাদের পরিচিতি</a>
@@ -480,8 +622,6 @@
     <h2 class="section-title">সম্মানিত <span>সদস্যবৃন্দ</span></h2>
     <div class="section-line"></div>
   </div>
-
-  <!-- নাশিদ শিল্পী -->
   <div class="team-category">
     <div class="team-cat-title">
       <h3>🎵 নাশিদ শিল্পী <span class="team-cat-sub">(যাদের নাশিদ আমরা আপলোড দিয়েছি)</span></h3>
@@ -497,13 +637,10 @@
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Al amin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/profile.php?id=61582764721807" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আল আমিন</h4><p>নাশিদ শিল্পী</p></div>
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Ridoy.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/ridoy.kawsarmahmud" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>কাউসার মাহমুদ হৃদয়</h4><p>নাশিদ শিল্পী</p></div>
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdur Rahman.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/abdur.rahman.huzaifi.148343" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুর রহমান</h4><p>নাশিদ শিল্পী</p></div>
-      <!-- নতুন ২ জন -->
-      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="arif.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/arfballh.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আরিফুল বিল্লাহ</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="arif.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/arfballh.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আরিফ বিল্লাহ</h4><p>নাশিদ শিল্পী</p></div>
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Basir.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/adnan.basir.23275" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আদনান বাছির</h4><p>নাশিদ শিল্পী</p></div>
     </div>
   </div>
-
-  <!-- প্রোডাকশন টিম -->
   <div class="team-category">
     <div class="team-cat-title"><h3>🎬 প্রোডাকশন টিম</h3><div class="team-cat-line"></div></div>
     <div class="team-grid">
@@ -514,8 +651,6 @@
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abu Hurayra.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div><a href="https://www.facebook.com/hm.abuhorira.khan.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আবু হুরায়রা খাঁন</h4><p>সহকারী</p></div>
     </div>
   </div>
-
-  <!-- কারী সাহেবান -->
   <div class="team-category">
     <div class="team-cat-title">
       <h3>📖 কারী সাহেবান <span class="team-cat-sub">(যাদের তিলাওয়াত আমরা আপলোড দিয়েছি)</span></h3>
@@ -528,8 +663,6 @@
       <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Maruf Ahmed Proshno.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><a href="https://www.facebook.com/marufahammad.binsalam" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মারুফ আহমেদ প্রশ্ন</h4><p>কারী</p></div>
     </div>
   </div>
-
-  <!-- আলেম প্যানেল -->
   <div class="team-category">
     <div class="team-cat-title">
       <h3>🎙️ আলেম প্যানেল <span class="team-cat-sub">(যাদের ওয়াজ আমরা আপলোড দিয়েছি)</span></h3>
@@ -561,12 +694,10 @@
         <div class="contact-item-text"><h5>ঠিকানা</h5><p>বারিধারা, নতুন বাজার, ভাটারা, ঢাকা-১২১২</p></div>
       </div>
       <div class="contact-item">
-        <!-- ক্লিক করলে সরাসরি ডায়াল -->
         <a href="tel:+8801704598772" class="contact-icon ci-red contact-icon-link" title="ফোন করুন">📞</a>
         <div class="contact-item-text"><h5>ফোন নম্বর</h5><p>+880 1704 598 772</p></div>
       </div>
       <div class="contact-item">
-        <!-- ক্লিক করলে সরাসরি email app -->
         <a href="mailto:gunjoronbd@gmail.com" class="contact-icon ci-teal contact-icon-link" title="ইমেইল করুন">✉️</a>
         <div class="contact-item-text"><h5>ইমেইল</h5><p>gunjoronbd@gmail.com</p></div>
       </div>
@@ -581,11 +712,11 @@
       </div>
     </div>
     <div class="contact-form">
-      <form action="https://api.web3forms.com/submit" method="POST">
+      <!-- ★ id যোগ করা হয়েছে, redirect ইনপুট সরানো হয়েছে ★ -->
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="40ed0ee3-1d0a-469b-af2c-b72febd3a513">
         <input type="hidden" name="subject" value="গুঞ্জরণ ওয়েবসাইট — নতুন বার্তা">
         <input type="hidden" name="from_name" value="গুঞ্জরণ ওয়েবসাইট">
-        <input type="hidden" name="redirect" value="thankyou.html">
         <div class="form-group"><label>আপনার নাম</label><input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required></div>
         <div class="form-group"><label>ফোন নম্বর</label><input type="tel" name="phone" placeholder="+880 ×××-×××-××××"></div>
         <div class="form-group"><label>বিষয়</label>
@@ -634,12 +765,7 @@
     <div class="footer-col">
       <h5>সোশ্যাল মিডিয়া</h5>
       <ul>
-        <li>
-          <a href="https://www.facebook.com/gonjoron" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" style="flex-shrink:0"><path fill="rgba(255,255,255,0.4)" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Facebook
-          </a>
-        </li>
+        <li><a href="https://www.facebook.com/gonjoron" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" style="flex-shrink:0"><path fill="rgba(255,255,255,0.4)" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a></li>
         <li><a href="https://www.youtube.com/@GunjoronStudio" target="_blank">▶ YouTube স্টুডিও</a></li>
         <li><a href="https://www.youtube.com/@gunjoron-tilawat" target="_blank">📖 তিলাওয়াত চ্যানেল</a></li>
         <li><a href="https://www.youtube.com/@gunjoronwaz" target="_blank">🎙️ ওয়াজ চ্যানেল</a></li>
@@ -658,6 +784,7 @@
   function switchTab(i){
     document.querySelectorAll('.tab-content').forEach((t,j)=>t.classList.toggle('active',j===i));
     document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
+    if(i>=0) document.getElementById('content').scrollIntoView({behavior:'smooth'});
   }
 
   /* ── SCROLL TOP ── */
@@ -674,37 +801,50 @@
     a.addEventListener('click',()=>document.getElementById('navbar').classList.remove('open'));
   });
 
-  /* ── MOBILE LOGO SCROLL TO NAVBAR CENTER ONLY ── */
+  /* ── MOBILE LOGO — EXACT CENTER FIX ── */
   const navLogoEl = document.getElementById('navLogo');
+  let _logoRect = null; // cache original position
+
   function handleLogoScroll(){
     if(window.innerWidth > 768){
       navLogoEl.style.transform='';
       navLogoEl.style.zIndex='';
+      _logoRect = null; // reset on resize to desktop
       return;
     }
 
-    const p = Math.min(window.scrollY / 180,1);
-
-    if(p>0){
+    // Cache original rect (without any transform applied)
+    if(!_logoRect){
+      const saved = navLogoEl.style.transform;
+      navLogoEl.style.transform = '';
       const r = navLogoEl.getBoundingClientRect();
-      const nav = document.getElementById('navbar').getBoundingClientRect();
+      _logoRect = {top:r.top, left:r.left, width:r.width, height:r.height};
+      navLogoEl.style.transform = saved;
+    }
 
-      const targetX = (window.innerWidth/2) - r.left - (r.width/2);
-      const targetY = (nav.top + nav.height/2) - r.top - (r.height/2);
+    const p = Math.min(window.scrollY / 180, 1);
 
-      const sc = 1 + (p*0.45);
+    if(p > 0){
+      const orig = _logoRect;
+      const navH = document.getElementById('navbar').getBoundingClientRect().height;
+      const sc = 1 + p * 0.45;
 
-      navLogoEl.style.transform =
-        `translate(${targetX*p}px,${targetY*p}px) scale(${sc})`;
+      // tx: interpolate center-x of logo to window center, accounting for left transform-origin + scale
+      // At p=1: visual_center_x = orig.left + tx + orig.width*1.45/2 = window.innerWidth/2
+      const tx = p * (window.innerWidth / 2 - orig.left - orig.width * 1.45 / 2);
 
-      navLogoEl.style.zIndex='1001';
-    }else{
-      navLogoEl.style.transform='';
-      navLogoEl.style.zIndex='';
+      // ty: interpolate center-y of logo to navbar center
+      const ty = p * (navH / 2 - orig.top - orig.height / 2);
+
+      navLogoEl.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+      navLogoEl.style.zIndex = '1001';
+    } else {
+      navLogoEl.style.transform = '';
+      navLogoEl.style.zIndex = '';
     }
   }
 
-  window.addEventListener('resize',handleLogoScroll);
+  window.addEventListener('resize', ()=>{ _logoRect=null; handleLogoScroll(); });
 
   /* ── SCROLL ANIMATION ── */
   window.addEventListener('load',()=>{
@@ -715,6 +855,54 @@
       el.style.opacity='0';el.style.transform='translateY(24px)';
       el.style.transition='opacity 0.5s,transform 0.5s';obs.observe(el);
     });
+  });
+
+  /* ── THANK YOU OVERLAY ── */
+  let _tyTimer = null;
+
+  function showThankyou(){
+    const ov = document.getElementById('tyOverlay');
+    ov.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    // countdown
+    let t = 10;
+    const el = document.getElementById('tyTimer');
+    el.textContent = t;
+    _tyTimer = setInterval(()=>{
+      t--;
+      el.textContent = t;
+      if(t <= 0){ clearInterval(_tyTimer); hideThankyou(); }
+    }, 1000);
+  }
+
+  function hideThankyou(){
+    clearInterval(_tyTimer);
+    document.getElementById('tyOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  /* ── FORM SUBMIT via Fetch (no page redirect) ── */
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    const origText = btn.textContent;
+    btn.textContent = 'পাঠানো হচ্ছে...';
+    btn.disabled = true;
+    try {
+      const fd = new FormData(this);
+      const res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:fd});
+      const data = await res.json();
+      if(data.success){
+        this.reset();
+        showThankyou();
+      } else {
+        alert('কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+      }
+    } catch(err){
+      alert('নেটওয়ার্ক সমস্যা হয়েছে। ইন্টারনেট চেক করে আবার চেষ্টা করুন।');
+    }
+    btn.textContent = origText;
+    btn.disabled = false;
   });
 </script>
 </body>
