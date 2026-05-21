@@ -22,6 +22,7 @@
     display:flex;align-items:center;justify-content:space-between;
     box-shadow:0 2px 24px rgba(0,0,0,0.45),0 1px 0 rgba(40,120,168,0.3);}
   .nav-logo img{height:48px;object-fit:contain;display:block;border-radius:4px;}
+  .nav-logo{transition:transform 0.05s linear;transform-origin:left center;}
   .nav-links{display:flex;gap:6px;list-style:none;}
   .nav-links a{color:#fff;text-decoration:none;font-size:0.82rem;font-weight:600;
     padding:7px 13px;border-radius:8px;
@@ -34,14 +35,31 @@
     font-size:0.82rem;border:none;transition:all 0.22s;white-space:nowrap;
     box-shadow:0 2px 10px rgba(212,43,43,0.4);}
   .nav-cta:hover{background:linear-gradient(135deg,#b81f1f,#8a1010);transform:translateY(-2px);}
+
+  /* ── HAMBURGER (আধুনিক) ── */
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
-    background:none;border:none;padding:4px;}
-  .hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;display:block;}
-  nav.open .nav-links{display:flex;flex-direction:column;position:absolute;
-    top:100%;left:0;right:0;
+    background:linear-gradient(135deg,rgba(255,255,255,0.1),rgba(40,120,168,0.15));
+    border:1px solid rgba(255,255,255,0.22);
+    padding:9px 10px;border-radius:10px;
+    align-items:center;justify-content:center;
+    transition:all 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+  .hamburger:hover{background:linear-gradient(135deg,rgba(212,43,43,0.35),rgba(212,43,43,0.15));
+    border-color:rgba(212,43,43,0.55);box-shadow:0 0 14px rgba(212,43,43,0.3);}
+  .hamburger span{width:20px;height:2px;background:#fff;border-radius:2px;display:block;
+    transition:all 0.32s cubic-bezier(0.23,1,0.32,1);}
+  nav.open .hamburger{background:linear-gradient(135deg,rgba(212,43,43,0.4),rgba(212,43,43,0.2));
+    border-color:rgba(212,43,43,0.6);box-shadow:0 0 16px rgba(212,43,43,0.35);}
+  nav.open .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  nav.open .hamburger span:nth-child(2){opacity:0;transform:scaleX(0);}
+  nav.open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ── MOBILE MENU (horizontal) ── */
+  nav.open .nav-links{display:flex;flex-direction:row;flex-wrap:wrap;
+    justify-content:center;position:absolute;top:100%;left:0;right:0;
     background:linear-gradient(180deg,#0a123c,#0d1f4a);
-    padding:12px 4%;gap:6px;}
-  nav.open .nav-cta{display:block;width:fit-content;margin:0 4% 12px;}
+    padding:14px 4% 10px;gap:8px;
+    border-top:1px solid rgba(255,255,255,0.08);}
+  nav.open .nav-cta{display:flex;width:fit-content;margin:0 auto 12px;}
 
   /* ── TICKER ── */
   .ticker-outer{margin-top:64px;position:relative;overflow:hidden;}
@@ -68,7 +86,7 @@
   .hero{min-height:100vh;
     background:linear-gradient(160deg,#06102b 0%,#0d1f4a 45%,#1B3070 100%);
     display:flex;align-items:center;justify-content:center;text-align:center;
-    padding:80px 5% 60px;position:relative;overflow:hidden;}
+    padding:50px 5% 60px;position:relative;overflow:hidden;}
   .hero::before{content:'';position:absolute;inset:0;
     background:radial-gradient(ellipse at 50% 40%,rgba(40,120,168,0.22) 0%,transparent 65%);}
   .hero::after{content:'';position:absolute;inset:0;
@@ -80,8 +98,7 @@
     animation:fadeIn 1s 0.4s ease both;}
   .btn-primary{background:linear-gradient(135deg,var(--red),#a01818);color:#fff;
     padding:14px 30px;border-radius:10px;text-decoration:none;font-weight:700;
-    font-size:0.95rem;transition:all 0.3s;
-    box-shadow:0 4px 22px rgba(212,43,43,0.45);}
+    font-size:0.95rem;transition:all 0.3s;box-shadow:0 4px 22px rgba(212,43,43,0.45);}
   .btn-primary:hover{background:linear-gradient(135deg,#b81f1f,#8a1010);transform:translateY(-3px);
     box-shadow:0 8px 28px rgba(212,43,43,0.55);}
   .btn-outline{border:2px solid rgba(255,255,255,0.35);color:#fff;padding:14px 30px;
@@ -141,8 +158,7 @@
   .tab-btn{padding:9px 20px;border-radius:9px;border:2px solid #e5e7eb;background:#fff;
     cursor:pointer;font-size:0.84rem;font-weight:600;color:var(--gray);
     font-family:'Hind Siliguri',sans-serif;transition:all 0.22s;}
-  .tab-btn.active,.tab-btn:hover{
-    background:linear-gradient(135deg,var(--navy),var(--navy2));
+  .tab-btn.active,.tab-btn:hover{background:linear-gradient(135deg,var(--navy),var(--navy2));
     border-color:var(--navy);color:#fff;}
   .tab-content{display:none;}
   .tab-content.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;}
@@ -150,8 +166,7 @@
     box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:0.3s;background:#fff;}
   .yt-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(27,48,112,0.14);}
   .yt-card iframe{width:100%;aspect-ratio:16/9;display:block;border:none;}
-  .yt-card-info{padding:12px 14px;
-    background:linear-gradient(135deg,#fafbff,#f5f7fa);}
+  .yt-card-info{padding:12px 14px;background:linear-gradient(135deg,#fafbff,#f5f7fa);}
   .yt-card-info h4{font-size:0.9rem;font-weight:700;color:var(--navy);}
   .yt-card-info p{font-size:0.76rem;color:var(--gray);margin-top:3px;}
   .more-card{display:flex;align-items:center;justify-content:center;
@@ -174,8 +189,7 @@
   .about-intro{font-size:0.97rem;line-height:2;color:rgba(255,255,255,0.82);margin-bottom:22px;}
   .about-intro strong{color:#fff;}
   .about-work{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
-    border-radius:16px;padding:26px 30px;margin-bottom:22px;
-    backdrop-filter:blur(8px);}
+    border-radius:16px;padding:26px 30px;margin-bottom:22px;backdrop-filter:blur(8px);}
   .about-work h4{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:13px;}
   .about-work ul{list-style:none;display:flex;flex-wrap:wrap;gap:9px;}
   .about-work ul li{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);
@@ -200,14 +214,12 @@
     padding:20px 14px;text-align:center;
     box-shadow:0 3px 12px rgba(27,48,112,0.08);transition:0.3s;}
   .team-card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(27,48,112,0.16);}
-  /* ── TEAM PHOTO WRAP (নতুন) ── */
   .team-photo-wrap{position:relative;display:inline-block;margin:0 auto 13px;}
   .team-photo{width:80px;height:80px;border-radius:50%;margin:0;
     overflow:hidden;border:3px solid var(--teal);background:#e5e7eb;
     display:flex;align-items:center;justify-content:center;}
   .team-photo img{width:100%;height:100%;object-fit:cover;display:block;}
   .team-photo .fallback{font-size:2rem;}
-  /* ── FB ICON BADGE ── */
   .fb-icon-btn{position:absolute;bottom:1px;left:1px;width:22px;height:22px;
     background:#1877F2;border-radius:50%;display:flex;align-items:center;
     justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.35);
@@ -225,7 +237,10 @@
   .contact-info>p{color:var(--gray);line-height:1.8;margin-bottom:24px;font-size:0.92rem;}
   .contact-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:17px;}
   .contact-icon{width:40px;height:40px;border-radius:10px;display:flex;
-    align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+    align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;
+    text-decoration:none;}
+  .contact-icon-link{cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;}
+  .contact-icon-link:hover{transform:scale(1.12);box-shadow:0 4px 14px rgba(0,0,0,0.15);}
   .ci-navy{background:linear-gradient(135deg,rgba(27,48,112,0.12),rgba(27,48,112,0.06));}
   .ci-red{background:linear-gradient(135deg,rgba(212,43,43,0.12),rgba(212,43,43,0.06));}
   .ci-teal{background:linear-gradient(135deg,rgba(40,120,168,0.12),rgba(40,120,168,0.06));}
@@ -268,7 +283,8 @@
   .footer-col h5{color:#fff;font-weight:700;margin-bottom:15px;font-size:0.88rem;}
   .footer-col ul{list-style:none;}
   .footer-col li{margin-bottom:8px;}
-  .footer-col a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.8rem;transition:0.3s;}
+  .footer-col a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.8rem;transition:0.3s;
+    display:inline-flex;align-items:center;gap:6px;}
   .footer-col a:hover{color:var(--teal);}
   .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:18px;
     display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;}
@@ -299,7 +315,6 @@
     section{padding:58px 5%;}
     .section-title{font-size:1.45rem;}
     .tab-content.active{grid-template-columns:1fr;}
-    /* ── স্ট্যাট এক লাইনে ── */
     .hero-stats{gap:6px;flex-wrap:nowrap;}
     .stat{padding:8px 6px;min-width:0;flex:1;}
     .stat-num{font-size:1.1rem;}
@@ -310,7 +325,7 @@
 </head>
 <body>
 
-<!-- ── REUSABLE SVG DEFS ── -->
+<!-- SVG DEFS -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
   <symbol id="fb-svg" viewBox="0 0 24 24">
     <path fill="white" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -319,8 +334,8 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <div class="nav-logo">
-    <img loading="lazy" decoding="async" src="Logo771.png" alt="গুঞ্জরণ" onerror="this.onerror=null;this.src='https://scontent.fdac189-1.fna.fbcdn.net/v/t39.30808-6/699186887_122302543424018124_7467840352417706762_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Vn_BfbQ5kVAQ7kNvwGN3iGX&_nc_ht=scontent.fdac189-1.fna&oh=00_Af6ijIgAPpD42HCZuf_Sf16zvWfzlIzcqTyLwuQXk_stNQ&oe=6A0DFAE5'">
+  <div class="nav-logo" id="navLogo">
+    <img loading="lazy" decoding="async" src="logoA.gif" alt="গুঞ্জরণ" onerror="this.onerror=null;this.src='https://scontent.fdac189-1.fna.fbcdn.net/v/t39.30808-6/699186887_122302543424018124_7467840352417706762_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Vn_BfbQ5kVAQ7kNvwGN3iGX&_nc_ht=scontent.fdac189-1.fna&oh=00_Af6ijIgAPpD42HCZuf_Sf16zvWfzlIzcqTyLwuQXk_stNQ&oe=6A0DFAE5'">
   </div>
   <ul class="nav-links">
     <li><a href="#home">🏠 হোম</a></li>
@@ -336,10 +351,7 @@
 <!-- TICKER -->
 <div class="ticker-outer">
   <div class="ticker-bg">
-    <div class="ticker-badge">
-      <span class="dot"></span>
-      📢 বিজ্ঞপ্তি
-    </div>
+    <div class="ticker-badge"><span class="dot"></span>📢 বিজ্ঞপ্তি</div>
     <div class="ticker-scroll">
       <div class="ticker-track">
         <span class="ticker-item">আসসালামু আলাইকুম। আমরা একটি কল্যাণমূলক ইসলামিক প্রজেক্ট বাস্তবায়ন করছি; আপনার সম্মানিত প্রতিষ্ঠানের স্পন্সরশিপ ও সহযোগিতা কামনা করছি, যাতে দ্বীনের এই খেদমতে আপনারাও সওয়াবের অংশীদার হতে পারেন।</span>
@@ -450,10 +462,8 @@
     <div class="about-work">
       <h4>আমাদের কাজের পরিধি —</h4>
       <ul>
-        <li>ইসলামিক নাশিদ</li>
-        <li>ইসলামিক ফিল্ম ও শর্টফিল্ম</li>
-        <li>ওয়াজ ও দ্বীনি আলোচনা</li>
-        <li>কুরআন তিলাওয়াত</li>
+        <li>ইসলামিক নাশিদ</li><li>ইসলামিক ফিল্ম ও শর্টফিল্ম</li>
+        <li>ওয়াজ ও দ্বীনি আলোচনা</li><li>কুরআন তিলাওয়াত</li>
         <li>শিক্ষামূলক ও দাওয়াহভিত্তিক কনটেন্ট</li>
       </ul>
     </div>
@@ -478,114 +488,30 @@
       <div class="team-cat-line"></div>
     </div>
     <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Shoieb Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/shoieb.islam.221424" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>শোয়াইব ইসলাম</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুহাম্মাদ তাহসিন</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Omor Faruk.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/profile.php?id=100075224510619" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>ওমর ফারুক</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আব্দুল্লাহ আওলাদ</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Malek.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/abdul.malak.48838" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আব্দুল মালেক</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Al amin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/profile.php?id=61582764721807" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আল আমিন</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Ridoy.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/ridoy.kawsarmahmud" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>কাউসার মাহমুদ হৃদয়</h4><p>নাশিদ শিল্পী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdur Rahman.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div>
-          <a href="https://www.facebook.com/abdur.rahman.huzaifi.148343" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আব্দুর রহমান</h4><p>নাশিদ শিল্পী</p>
-      </div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Shoieb Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/shoieb.islam.221424" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>শোয়াইব ইসলাম</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুহাম্মাদ তাহসিন</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Omor Faruk.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/profile.php?id=100075224510619" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>ওমর ফারুক</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুল্লাহ আওলাদ</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Malek.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/abdul.malak.48838" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুল মালেক</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Al amin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/profile.php?id=61582764721807" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আল আমিন</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Ridoy.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/ridoy.kawsarmahmud" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>কাউসার মাহমুদ হৃদয়</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdur Rahman.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/abdur.rahman.huzaifi.148343" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুর রহমান</h4><p>নাশিদ শিল্পী</p></div>
+      <!-- নতুন ২ জন -->
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="arif.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/arfballh.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আরিফুল বিল্লাহ</h4><p>নাশিদ শিল্পী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Basir.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎵</span>'"></div><a href="https://www.facebook.com/adnan.basir.23275" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আদনান বাছির</h4><p>নাশিদ শিল্পী</p></div>
     </div>
   </div>
 
   <!-- প্রোডাকশন টিম -->
   <div class="team-category">
-    <div class="team-cat-title">
-      <h3>🎬 প্রোডাকশন টিম</h3>
-      <div class="team-cat-line"></div>
-    </div>
+    <div class="team-cat-title"><h3>🎬 প্রোডাকশন টিম</h3><div class="team-cat-line"></div></div>
     <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎬</span>'"></div>
-          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>ডিরেক্টর, ভিডিও এডিটর ও সিনেমাটোগ্রাফার</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Muminul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>✍️</span>'"></div>
-          <a href="https://www.facebook.com/mominulislam38" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুমিনুল ইসলাম</h4><p>গল্পকার, পোস্টার ডিজাইনার</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Mujahidul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎞️</span>'"></div>
-          <a href="https://www.facebook.com/md.mujahidul.islam.907353" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুজাহিদুল ইসলাম</h4><p>সহকারী ভিডিও এডিটর</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Aziz.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div>
-          <a href="https://www.facebook.com/abdulaziz720" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আব্দুল আজিজ</h4><p>সহকারী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abu Hurayra.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div>
-          <a href="https://www.facebook.com/hm.abuhorira.khan.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আবু হুরায়রা খাঁন</h4><p>সহকারী</p>
-      </div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎬</span>'"></div><a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>ডিরেক্টর, ভিডিও এডিটর ও সিনেমাটোগ্রাফার</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Muminul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>✍️</span>'"></div><a href="https://www.facebook.com/mominulislam38" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুমিনুল ইসলাম</h4><p>গল্পকার, পোস্টার ডিজাইনার</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Mujahidul Islam.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎞️</span>'"></div><a href="https://www.facebook.com/md.mujahidul.islam.907353" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুজাহিদুল ইসলাম</h4><p>সহকারী ভিডিও এডিটর</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdul Aziz.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div><a href="https://www.facebook.com/abdulaziz720" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুল আজিজ</h4><p>সহকারী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abu Hurayra.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🤝</span>'"></div><a href="https://www.facebook.com/hm.abuhorira.khan.2024" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আবু হুরায়রা খাঁন</h4><p>সহকারী</p></div>
     </div>
   </div>
 
@@ -596,34 +522,10 @@
       <div class="team-cat-line"></div>
     </div>
     <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
-          <a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>কারী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
-          <a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>আব্দুল্লাহ আওলাদ</h4><p>কারী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
-          <a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুহাম্মাদ তাহসিন</h4><p>কারী</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo"><img loading="lazy" decoding="async" src="Maruf Ahmed Proshno.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div>
-          <a href="https://www.facebook.com/marufahammad.binsalam" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মারুফ আহমেদ প্রশ্ন</h4><p>কারী</p>
-      </div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Mustafizur Rahman Junayed.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><a href="https://www.facebook.com/mustafiz.rj" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুস্তাফিজুর রহমান জুনায়েদ</h4><p>কারী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Abdullah Awlad.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><a href="https://www.facebook.com/abdullahawlad1" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>আব্দুল্লাহ আওলাদ</h4><p>কারী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Tahsin.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><a href="https://www.facebook.com/muhammad.tahsin.212375" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুহাম্মাদ তাহসিন</h4><p>কারী</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo"><img loading="lazy" decoding="async" src="Maruf Ahmed Proshno.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>📖</span>'"></div><a href="https://www.facebook.com/marufahammad.binsalam" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মারুফ আহমেদ প্রশ্ন</h4><p>কারী</p></div>
     </div>
   </div>
 
@@ -634,41 +536,11 @@
       <div class="team-cat-line"></div>
     </div>
     <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Mamunul Hok.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
-          <a href="https://www.facebook.com/maolanamamunulhaque" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মাওলানা মামুনুল হক</h4><p style="color:#6b2fa0;">আলেম</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Sakawat Hosain Raji.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
-          <a href="https://www.facebook.com/shakhaowat.hossain.52" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মুফতি সাকাওয়াত হুসাইন রাজি</h4><p style="color:#6b2fa0;">আলেম</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Habibullah mahmud Kasemi.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
-          <!-- কোনো নির্দিষ্ট প্রোফাইল লিংক নেই, আইকন নেই -->
-        </div>
-        <h4>মুফতি হাবিবুল্লাহ মাহমুদ কাসেমী</h4><p style="color:#6b2fa0;">আলেম</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Oli Ullah.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
-          <!-- কোনো নির্দিষ্ট প্রোফাইল লিংক নেই, আইকন নেই -->
-        </div>
-        <h4>মুফতি ওয়ালি উল্লাহ</h4><p style="color:#6b2fa0;">আলেম</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo-wrap">
-          <div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Ibrahim Sulatn.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div>
-          <a href="https://www.facebook.com/MawlanaIbrahimSultan" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a>
-        </div>
-        <h4>মাওলানা ইবরাহিম সুলতান</h4><p style="color:#6b2fa0;">আলেম</p>
-      </div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Mamunul Hok.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><a href="https://www.facebook.com/maolanamamunulhaque" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মাওলানা মামুনুল হক</h4><p style="color:#6b2fa0;">আলেম</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Sakawat Hosain Raji.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><a href="https://www.facebook.com/shakhaowat.hossain.52" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মুফতি সাকাওয়াত হুসাইন রাজি</h4><p style="color:#6b2fa0;">আলেম</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Habibullah mahmud Kasemi.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div></div><h4>মুফতি হাবিবুল্লাহ মাহমুদ কাসেমী</h4><p style="color:#6b2fa0;">আলেম</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Oli Ullah.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div></div><h4>মুফতি ওয়ালি উল্লাহ</h4><p style="color:#6b2fa0;">আলেম</p></div>
+      <div class="team-card"><div class="team-photo-wrap"><div class="team-photo" style="border-color:#6b2fa0;"><img loading="lazy" decoding="async" src="Ibrahim Sulatn.jpg" alt="" onerror="this.parentNode.innerHTML='<span class=\'fallback\'>🎙️</span>'"></div><a href="https://www.facebook.com/MawlanaIbrahimSultan" target="_blank" rel="noopener" class="fb-icon-btn" aria-label="Facebook"><svg width="12" height="12"><use href="#fb-svg"/></svg></a></div><h4>মাওলানা ইবরাহিম সুলতান</h4><p style="color:#6b2fa0;">আলেম</p></div>
     </div>
   </div>
 </section>
@@ -684,11 +556,21 @@
     <div class="contact-info">
       <h3>গুঞ্জরণের সাথে যুক্ত হন</h3>
       <p>স্টুডিও বুকিং, কন্টেন্ট তৈরি, স্পন্সরশিপ বা যেকোনো বিষয়ে আমাদের সাথে যোগাযোগ করুন।</p>
-      <div class="contact-item"><div class="contact-icon ci-navy">📍</div><div class="contact-item-text"><h5>ঠিকানা</h5><p>বারিধারা, নতুন বাজার, ভাটারা, ঢাকা-১২১২</p></div></div>
-      <div class="contact-item"><div class="contact-icon ci-red">📞</div><div class="contact-item-text"><h5>ফোন নম্বর</h5><p>+880 1704 598 772</p></div></div>
-      <div class="contact-item"><div class="contact-icon ci-teal">✉️</div><div class="contact-item-text"><h5>ইমেইল</h5><p>gunjoronbd@gmail.com</p></div></div>
+      <div class="contact-item">
+        <div class="contact-icon ci-navy">📍</div>
+        <div class="contact-item-text"><h5>ঠিকানা</h5><p>বারিধারা, নতুন বাজার, ভাটারা, ঢাকা-১২১২</p></div>
+      </div>
+      <div class="contact-item">
+        <!-- ক্লিক করলে সরাসরি ডায়াল -->
+        <a href="tel:+8801704598772" class="contact-icon ci-red contact-icon-link" title="ফোন করুন">📞</a>
+        <div class="contact-item-text"><h5>ফোন নম্বর</h5><p>+880 1704 598 772</p></div>
+      </div>
+      <div class="contact-item">
+        <!-- ক্লিক করলে সরাসরি email app -->
+        <a href="mailto:gunjoronbd@gmail.com" class="contact-icon ci-teal contact-icon-link" title="ইমেইল করুন">✉️</a>
+        <div class="contact-item-text"><h5>ইমেইল</h5><p>gunjoronbd@gmail.com</p></div>
+      </div>
       <div class="social-links">
-        <!-- Real Facebook SVG logo -->
         <a href="https://www.facebook.com/gonjoron" target="_blank" class="social-btn s-fb">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" style="flex-shrink:0;display:block"><path fill="white" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           Facebook
@@ -698,12 +580,12 @@
         <a href="https://www.youtube.com/@gunjoronwaz" target="_blank" class="social-btn s-pu">🎙️ ওয়াজ</a>
       </div>
     </div>
-    <!-- FormSubmit দিয়ে ইমেইলে পাঠানো হবে -->
     <div class="contact-form">
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="40ed0ee3-1d0a-469b-af2c-b72febd3a513">
         <input type="hidden" name="subject" value="গুঞ্জরণ ওয়েবসাইট — নতুন বার্তা">
         <input type="hidden" name="from_name" value="গুঞ্জরণ ওয়েবসাইট">
+        <input type="hidden" name="redirect" value="thankyou.html">
         <div class="form-group"><label>আপনার নাম</label><input type="text" name="name" placeholder="পূর্ণ নাম লিখুন" required></div>
         <div class="form-group"><label>ফোন নম্বর</label><input type="tel" name="phone" placeholder="+880 ×××-×××-××××"></div>
         <div class="form-group"><label>বিষয়</label>
@@ -729,7 +611,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <img loading="lazy" decoding="async" src="https://drive.google.com/uc?export=view&id=1GH3bpQCTCGV4rFQZWeXrI4XIfGU7PfYM" alt="গুঞ্জরণ" onerror="this.style.display='none'">
-      <p>অপসংস্কৃতির কালো হাত ভেঙে চূর্ণ-বিচূর্ণ করে, সুস্থ সংস্কৃতির জয় গান ছড়িয়ে দিতে আমরা এগিয়ে চলেছি দৃঢ় প্রত্যয়ে। আমাদের লক্ষ্য — সারা দুনিয়ায় নৈতিকতা, সৌন্দর্য আর ইসলামী মূল্যবোধের আলো ছড়িয়ে দেওয়া। এই মহৎ যাত্রায় আমরা বিশ্বাস করি, আপনিও হবেন আমাদের অটুট সঙ্গী।</p>
+      <p>অপসংস্কৃতির কালো হাত ভেঙে চূর্ণ-বিচূর্ণ করে, সুস্থ সংস্কৃতির জয় গান ছড়িয়ে দিতে আমরা এগিয়ে চলেছি দৃঢ় প্রত্যয়ে। আমাদের লক্ষ্য — সারা দুনিয়ায় নৈতিকতা, সৌন্দর্য আর ইসলামী মূল্যবোধের আলো ছড়িয়ে দেওয়া।</p>
     </div>
     <div class="footer-col">
       <h5>সেক্টর</h5>
@@ -752,7 +634,12 @@
     <div class="footer-col">
       <h5>সোশ্যাল মিডিয়া</h5>
       <ul>
-        <li><a href="https://www.facebook.com/gonjoron" target="_blank">📘 Facebook</a></li>
+        <li>
+          <a href="https://www.facebook.com/gonjoron" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" style="flex-shrink:0"><path fill="rgba(255,255,255,0.4)" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </li>
         <li><a href="https://www.youtube.com/@GunjoronStudio" target="_blank">▶ YouTube স্টুডিও</a></li>
         <li><a href="https://www.youtube.com/@gunjoron-tilawat" target="_blank">📖 তিলাওয়াত চ্যানেল</a></li>
         <li><a href="https://www.youtube.com/@gunjoronwaz" target="_blank">🎙️ ওয়াজ চ্যানেল</a></li>
@@ -767,26 +654,68 @@
 <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
+  /* ── TAB ── */
   function switchTab(i){
     document.querySelectorAll('.tab-content').forEach((t,j)=>t.classList.toggle('active',j===i));
     document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
   }
+
+  /* ── SCROLL TOP ── */
   window.addEventListener('scroll',()=>{
     document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400);
+    handleLogoScroll();
   },{passive:true});
+
+  /* ── HAMBURGER ── */
   function toggleNav(){
     document.getElementById('navbar').classList.toggle('open');
   }
   document.querySelectorAll('.nav-links a').forEach(a=>{
     a.addEventListener('click',()=>document.getElementById('navbar').classList.remove('open'));
   });
-  window.addEventListener('load',()=>{const obs=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
-  }),{threshold:0.06});
-  document.querySelectorAll('.sector-card,.yt-card,.more-card,.team-card').forEach(el=>{
-    el.style.opacity='0';el.style.transform='translateY(24px)';
-    el.style.transition='opacity 0.5s,transform 0.5s';obs.observe(el);
-  });});
+
+  /* ── MOBILE LOGO SCROLL TO NAVBAR CENTER ONLY ── */
+  const navLogoEl = document.getElementById('navLogo');
+  function handleLogoScroll(){
+    if(window.innerWidth > 768){
+      navLogoEl.style.transform='';
+      navLogoEl.style.zIndex='';
+      return;
+    }
+
+    const p = Math.min(window.scrollY / 180,1);
+
+    if(p>0){
+      const r = navLogoEl.getBoundingClientRect();
+      const nav = document.getElementById('navbar').getBoundingClientRect();
+
+      const targetX = (window.innerWidth/2) - r.left - (r.width/2);
+      const targetY = (nav.top + nav.height/2) - r.top - (r.height/2);
+
+      const sc = 1 + (p*0.45);
+
+      navLogoEl.style.transform =
+        `translate(${targetX*p}px,${targetY*p}px) scale(${sc})`;
+
+      navLogoEl.style.zIndex='1001';
+    }else{
+      navLogoEl.style.transform='';
+      navLogoEl.style.zIndex='';
+    }
+  }
+
+  window.addEventListener('resize',handleLogoScroll);
+
+  /* ── SCROLL ANIMATION ── */
+  window.addEventListener('load',()=>{
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
+    }),{threshold:0.06});
+    document.querySelectorAll('.sector-card,.yt-card,.more-card,.team-card').forEach(el=>{
+      el.style.opacity='0';el.style.transform='translateY(24px)';
+      el.style.transition='opacity 0.5s,transform 0.5s';obs.observe(el);
+    });
+  });
 </script>
 </body>
 </html>
